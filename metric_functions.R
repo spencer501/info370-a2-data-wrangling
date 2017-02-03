@@ -1,21 +1,27 @@
 # File containing functions for various segregation metrics
 #
 
-# Gini
-gini <- function(city) {
+## Gini Coefficient
+# Given properly formatted data about a city, returns the Gini Coefficient
+#
+giniCoeff <- function(city) {
 
-    t <- city$pop
-    p <- city$pct.not.white
-    x <- city$pop.not.white
+    t <- city$pop           # population of each census tract
+    p <- city$pct.not.white # ratio of non white population to total population in each census tract
+    x <- city$pop.not.white # non white population in each census tract
 
+    # help from: http://stackoverflow.com/questions/11388359/
+    combinations <- expand.grid(1:nrow(city), 1:nrow(city))
+    i <- combinations[, 1]
+    j <- combinations[, 2]
 
-    i.j <- expand.grid(1:nrow(city), 1:nrow(city))
+    # inspired by: https://stat.ethz.ch/pipermail/r-help/2008-August/172358.html
+    top.sum <- sum(t[i] * t[j] * abs(p[i] - p[j]))
 
-    topSum <- function(i, j) {
-        sum(t[i] * t[j] * abs(p[i] - p[j]))
-    }
+    total.pct.not.white <- sum(x)/sum(t)
+    denominator <- 2 * sum(t)**2 * total.pct.not.white * (1 - total.pct.not.white)
 
-    index <- topSum(i.j[, 1], i.j[, 2]) / (2 * sum(t)**2 * (sum(x)/sum(t))*(1-(sum(x)/sum(t))))
+    coeff <- top.sum / denominator
 
-    return(index)
+    return(coeff)
 }
