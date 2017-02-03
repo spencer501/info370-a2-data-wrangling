@@ -6,7 +6,7 @@
 #
 giniCoeff <- function(city) {
 
-    t <- city$pop           # population of each census tract
+    t <- city$pop           # total population of each census tract
     p <- city$pct.not.white # ratio of non white population to total population in each census tract
     x <- city$pop.not.white # non white population in each census tract
 
@@ -24,4 +24,21 @@ giniCoeff <- function(city) {
     coeff <- top.sum / denominator
 
     return(coeff)
+}
+
+## Correlation Index
+# Given properly formatted data about a city, returns the Correlation Index
+#
+correlation <- function(city) {
+
+    x <- city$pop.not.white # non white population in each census tract
+    t <- city$pop           # total population of each census tract
+
+    total.pct.not.white <- sum(x) / sum(t)
+
+    isolation <- sum((x/sum(x)) * (x/t))
+
+    corr <- (isolation - total.pct.not.white) / (1 - total.pct.not.white)
+
+    return(corr)
 }
