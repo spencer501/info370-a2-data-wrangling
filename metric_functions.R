@@ -24,8 +24,8 @@ giniCoeff <- function(city) {
     return(coeff)
 }
 
-# Correlation Index
-correlation <- function(city) {
+# Correlation Ratio
+correlationRatio <- function(city) {
 
     x <- city$pop.not.white # non white population in each census tract
     t <- city$pop           # total population of each census tract
