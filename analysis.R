@@ -27,3 +27,22 @@ city.data <- lapply(
              '',
              filenames,
              fixed = TRUE))
+
+tmp.baltimore <- city.data$baltimore
+
+
+# Get geographical data
+geo.data <- read.delim('data/Gaz_tracts_national.txt') %>%
+    select(GEOID,
+           ALAND,
+           INTPTLAT,
+           INTPTLONG) %>%
+    rename(area = ALAND,
+           lat = INTPTLAT,
+           long = INTPTLONG)
+
+
+
+
+
+
