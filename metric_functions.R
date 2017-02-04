@@ -1,9 +1,7 @@
 # File containing functions for various segregation metrics
 #
 
-## Gini Coefficient
-# Given properly formatted data about a city, returns the Gini Coefficient
-#
+# Gini Coefficient
 giniCoeff <- function(city) {
 
     t <- city$pop           # total population of each census tract
@@ -26,9 +24,7 @@ giniCoeff <- function(city) {
     return(coeff)
 }
 
-## Correlation Index
-# Given properly formatted data about a city, returns the Correlation Index
-#
+# Correlation Index
 correlation <- function(city) {
 
     x <- city$pop.not.white # non white population in each census tract
@@ -41,4 +37,19 @@ correlation <- function(city) {
     corr <- (isolation - total.pct.not.white) / (1 - total.pct.not.white)
 
     return(corr)
+}
+
+
+# Delta
+delta <- function(city) {
+
+    x <- city$pop.not.white # non white population in each census tract
+    a <- city$area          # area of each census tract
+
+    x.tot <- sum(x)
+    a.tot <- sum(a)
+
+    result <- .5 * sum(abs((x/x.tot) - (a/a.tot)))
+
+    return(result)
 }
