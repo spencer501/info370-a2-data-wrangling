@@ -6,6 +6,46 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, fig.retina = 4)
+knitr::opts_chunk$set(
+    echo = FALSE,
+    warning = FALSE,
+    message = FALSE,
+    fig.retina = 4
+    )
+
+# Needed libraries
+library(knitr)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+
+# Source analysis
+source('analysis.R')
+
 ```
 
+## **Metric Definition**
+
+### Gini Coefficient:
+$$\frac { \sum _{ i=1 }^{ n }{ \sum _{ j=1 }^{ n }{ { t }_{ i }{ t }_{ j }\left|
+{ p }_{ i }-{ p }_{ j } \right| } } }{ 2{ T }^{ 2 }P(1-P) } $$
+
+Where $n$ is the number of regions, ${t}_{i}$ is the total population of region
+$i$, ${j}_{i}$ is the minority population proportion region $i$, $T$ is the
+total population across all regions, and $P$ is minority population proportion
+across all regions.
+
+The _Gini Coefficient_ defines segregation by the _eveness_ of a population. It
+essentially describes the average difference in minority population proportions
+across all regions in a city, expressed over the maximimun difference in the
+city to give a proportion from 0 to 1, with higher values indicating more
+segregation (averge difference is closer to the max difference). ${p}_{i}$ and
+${t}_{i}$ give tell us the size of a minority population in a region, which
+we can then compare across regions, and normalize agianst the total minority
+population ($P$ and $T$). This metric is great for gauging differences between
+regions, as it specifically compares distances between all regions. It is also a
+comparison of spatial distributions, something easy to visualize and understand.
+However, it is naive to think that the physical locations of a minority
+population is the only thing that contributes to segregation. This measure
+also leaves out possibly important factors such as region location and detailed
+dynamics withing a region.
