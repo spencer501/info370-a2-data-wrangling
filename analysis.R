@@ -11,11 +11,11 @@ source('metric_functions.R')
 geo.data <- read.delim('data/Gaz_tracts_national.txt') %>%
     select(GEOID,
            ALAND,
-           INTPTLAT,
-           INTPTLONG) %>%
+           INTPTLONG,
+           INTPTLAT) %>%
     rename(area = ALAND,
-           lat = INTPTLAT,
-           long = INTPTLONG)
+           long = INTPTLONG,
+           lat = INTPTLAT)
 
 # store all data as a list of dataframes
 # help from: http://stackoverflow.com/questions/5319839/,
