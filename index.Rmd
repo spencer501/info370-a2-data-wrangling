@@ -17,14 +17,15 @@ knitr::opts_chunk$set(
 
 # Needed libraries
 library(knitr)
-library(ggplot2)
-library(dplyr)
-library(tidyr)
 library(reshape2)
+library(psych)
+library(ggplot2)
 library(plotly)
+library(dplyr)
 
 # Source analysis
 source('analysis.R')
+source('multiplot.r')
 
 ```
 
@@ -155,4 +156,99 @@ p.bar.plot <-
 p.bar.plot
 ```
 
+Here we see that while the Gini Coefficient and Correlation Ratio appear to have
+some nontrivial degree of correlation, the Delta Index has no relation to the
+other two metrics. We can show that this is the case by testing the correlation 
+of each metric:
 
+```{r metric correlation}
+
+# Correlation and p-value data
+cors <- corr.test(seg.metrics[2:4])
+
+gini.corr.scatter <- ggplot(
+    data = seg.metrics,
+    aes(x = Gini,
+        y = Correlation)
+    ) +
+    geom_point(
+        size = 3,
+        color = "red"
+    ) +
+    stat_smooth(
+        method = "lm"
+    ) +
+    labs(
+        title = "Gini Coeff vs Correlation Ratio",
+        subtitle = paste('Cor', 
+                         round(cors$r[2, 1],
+                               digits = 2),
+                         '    p-value:',
+                         round(cors$p[2, 1],
+                               digits = 2)),
+        x = "Gini",
+        y = "Correlation"
+    )
+
+gini.delta.scatter <- ggplot(
+    data = seg.metrics,
+    aes(x = Gini,
+        y = Delta)
+    ) +
+    geom_point(
+        size = 3,
+        color = "red"
+    ) +
+    stat_smooth(
+        method = "lm"
+    ) +
+    labs(
+        title = "Gini Coeff vs Delta Index",
+        subtitle = paste('Cor:', 
+                         round(cors$p[3, 1],
+                               digits = 2),
+                         '    p-value:',
+                         round(cors$p[3, 1],
+                               digits = 2)),
+        x = "Gini",
+        y = "Delta"
+    )
+
+delta.corr.scatter <- ggplot(
+    data = seg.metrics,
+    aes(x = Delta,
+        y = Correlation)
+    ) +
+    geom_point(
+        size = 3,
+        color = "red"
+    ) +
+    stat_smooth(
+        method = "lm"
+    ) +
+    labs(
+        title = "Delta Index vs Correlation Ratio",
+        subtitle = paste('Cor:',
+                         round(cors$r[3, 2],
+                               digits = 2),
+                         '    p-value:',
+                         round(cors$p[3, 2],
+                               digits = 2)),
+        x = "Delta",
+        y = "Correlation"
+    )
+
+
+multiplot(gini.corr.scatter, 
+          gini.delta.scatter,
+          delta.corr.scatter,
+          cols = 2)
+
+```
+
+Theses correlations can be attributed to the fact that the Delta index is the 
+only index to make use of area data. Since the Gini Coefficient and Correlation
+Ratio rely on many of the same variables, it makes sense that they are 
+correlated because they pull from the same data. The addition of the area data
+in the Delta index means it should vary differently, as it pulls from different
+data.
