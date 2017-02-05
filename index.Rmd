@@ -48,4 +48,28 @@ comparison of spatial distributions, something easy to visualize and understand.
 However, it is naive to think that the physical locations of a minority
 population is the only thing that contributes to segregation. This measure
 also leaves out possibly important factors such as region location and detailed
-dynamics withing a region.
+dynamics withing a region, such as the size of two groups being compared.
+
+
+### Correlation Ratio:
+$$\frac { (I-P) }{ (1-P) } ;\quad I=\sum _{ i=1 }^{ n }{ \left[ \left( \frac
+{ { x }_{ i } }{ X } \right) \left( \frac { { y }_{ i } }{ { t }_{ i } } \right)
+\right] } $$
+
+Where $n$ is the number of regions, $I$ is the _isolation index_, $P$ is the
+minority population proportion across all regions, ${x}_{i}$ is the minority
+population of area $i$, ${y}_{i}$ is the majority population of area $i$, $X$ is
+the the total minority population across all regions, and ${t}_{i}$ is the total
+population of region $i$.
+
+The _Correlation ratio_ is a method of measuring the potential contact between
+minority and majority group members, indicating the extent to which two groups
+share common residential areas. This measure is an adjusted version of the
+_isolation index_, which measures the probability a minority person shares
+an area with another minority person, correcting for the possibility of more
+than one minority group. It produces a value from 0 to 1, with higher values
+indicating more segregationThe isolation index is determined by looking at
+the proportion of of minority members $\left( \frac{{x}_{i}}{X} \right)$ and
+proportion of majority group members $\left( \frac{{y}_{i}}{{t}_{i}} \right)$
+in a region. The correlation ratio then takes the isolation index and puts it in
+the context of the total minority proportion in a city $P$.
