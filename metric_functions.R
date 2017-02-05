@@ -72,3 +72,25 @@ newMetric <- function(city) {
 
     return(result)
 }
+
+# Relative Clustering
+relativeClustering <- function(city) {
+
+    # Load libray for measuring geospatial distance
+    library(geosphere)
+
+    x <- city$pop.not.white # non white population in each census tract
+    y <- city$pop.white # non white population in each census tract
+
+    # help from: http://stackoverflow.com/questions/11388359/
+    combinations <- expand.grid(1:nrow(city), 1:nrow(city))
+    i <- combinations[, 1]
+    j <- combinations[, 2]
+
+    d <- distm(city[, (9:10)],
+               city[, (9:10)],
+               fun = distHaversine)
+    diag(d) <- (.6 * city[, 'area'])**.5
+    c <- exp(-1 * d)
+
+}
