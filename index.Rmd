@@ -104,7 +104,7 @@ kable(seg.metrics, digits = 2)
 All of the metrics used are defined on a normalized scale, with **higher values
 indicating higher segregation**. It is important to note, however, that even
 though all of these metrics have the same range in value, the scales are not
-necessarily equvalent. A .5 Gini Coefficient is not the same as a .5 Delta 
+necessarily equivalent. A .5 Gini Coefficient is not the same as a .5 Delta 
 Index, for example.
 
 ```{r most segregated}
@@ -246,7 +246,7 @@ multiplot(gini.corr.scatter,
 
 ```
 
-Theses correlations can be attributed to the fact that the Delta index is the 
+These correlations can be attributed to the fact that the Delta index is the 
 only index to make use of area data. Since the Gini Coefficient and Correlation
 Ratio rely on many of the same variables, it makes sense that they are 
 correlated because they pull from the same data. The addition of the area data
