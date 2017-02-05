@@ -78,7 +78,11 @@ indicating more segregation. The isolation index is determined by looking at
 the proportion of minority members $\left( \frac{{x}_{i}}{X} \right)$ and
 proportion of majority group members $\left( \frac{{y}_{i}}{{t}_{i}} \right)$
 in a region. The correlation ratio then takes the isolation index and puts it in
-the context of the total minority proportion in a city $P$.
+the context of the total minority proportion in a city $P$. This is a good
+metric to use if you want more insight on how living in a segregated area can
+affect a person's life, outside of where they live. Howeverm this metric does
+doesn't realate one region to another at all, which prevents us from seeing
+changes across a city.
 
 
 ### Delta Index:
@@ -90,7 +94,18 @@ $i$, $X$ is the total minority population across all regions, ${a}_{i}$ is
 the area of region $i$ in square meters, and $A$ is the total area across all
 regions in square meters.
 
-The _Delta Index_ measures the concentration of a minority group.
+The _Delta Index_ measures the concentration of a minority group. This metric 
+gives us the proportion of minority members living in areas with above average
+proportions of minority people. It can be looked at as the proportion of a group
+that would have to move to different regions to get a more uniform density. The
+metric finds this by looking at the absolute differences in fraction of total
+minorities and fraction of total area for a given region, 
+$\left( \frac {{x}_{i}}{X} \right) -\left( \frac {{a}_{i}}{A} \right)$. One of 
+the features of the Delta Index is that it uses area data to better understand
+the physical regions were people live. Unfortunatly, it uses only one other
+souce of data in it's measurements, which could leave out important information.
+Also, this metric does not compare between regions, only looking at the total.
+This makes it hard to look at trends between regions.
 
 
 ## **Metric Comparison**
@@ -277,4 +292,8 @@ plot.qual(
 _Note: there is no reason to start with any particular metric in the above 
 visual, but keeping Correlation and Gini next to each other shows thier 
 similarity._
+
+
+## Metric Proposal
+
 
