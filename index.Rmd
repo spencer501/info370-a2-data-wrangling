@@ -75,12 +75,13 @@ in a region. The correlation ratio then takes the isolation index and puts it in
 the context of the total minority proportion in a city $P$.
 
 
-### Delta:
-$$0.5\sum _{ i=1 }^{ n }{ \left| \left( \frac { { x }_{ i } }{ X }  \right) -\left( \frac { { a }_{ i } }{ A }  \right)  \right|  } $$
+### Delta Index:
+$$0.5\sum _{ i=1 }^{ n }{ \left| \left( \frac { { x }_{ i } }{ X } \right) -
+\left( \frac { { a }_{ i } }{ A } \right) \right| } $$
 
 Where $n$ is the number of regions, ${x}_{i}$ is the minority population of area
 $i$, $X$ is the total minority population across all regions, ${a}_{i}$ is
 the area of region $i$ in square meters, and $A$ is the total area across all
 regions in square meters.
 
-The _Delta Index_
+The _Delta Index_ measures the concentration of a minority group.
