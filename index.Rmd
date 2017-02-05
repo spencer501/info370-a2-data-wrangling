@@ -26,6 +26,7 @@ library(dplyr)
 # Source analysis
 source('analysis.R')
 source('multiplot.r')
+source('plot_qual.r')
 
 ```
 
@@ -252,3 +253,28 @@ Ratio rely on many of the same variables, it makes sense that they are
 correlated because they pull from the same data. The addition of the area data
 in the Delta index means it should vary differently, as it pulls from different
 data.
+
+This is evident in the change in segregation ranking for each metric. Gini and
+Correlation have almost the same ranking, but the Delta Index is wildly
+different.
+
+```{r plot rank change}
+# Reshape data
+rank.data <- seg.metrics %>%
+    melt() %>% 
+    rename(metric = variable) %>% 
+    dcast(metric ~ City)
+
+par(mar = c(0, 0, 1, 0), family = 'serif')
+plot.qual(
+    rank.data,
+    rs.ln = 6,
+    alpha = 0.5,
+    dt.tx = T,
+    main = 'Changes in Segregation Rank Across Metrics')
+```
+
+_Note: there is no reason to start with any particular metric in the above 
+visual, but keeping Correlation and Gini next to each other shows thier 
+similarity._
+
