@@ -37,7 +37,7 @@ $$\frac { \sum _{ i=1 }^{ n }{ \sum _{ j=1 }^{ n }{ { t }_{ i }{ t }_{ j }\left|
 { p }_{ i }-{ p }_{ j } \right| } } }{ 2{ T }^{ 2 }P(1-P) } $$
 
 Where $n$ is the number of regions, ${t}_{i}$ is the total population of region
-$i$, ${j}_{i}$ is the minority population proportion region $i$, $T$ is the
+$i$, ${p}_{i}$ is the minority population proportion in region $i$, $T$ is the
 total population across all regions, and $P$ is minority population proportion
 across all regions.
 
@@ -295,5 +295,50 @@ similarity._
 
 
 ## Metric Proposal
+$$\sum _{ i=1 }^{n}{ \sum _{j=1}^{n}{ \left[ \left| \frac {{p}_{i}}{{a }_{i}} -\frac {{p}_{j}}{{a}_{j}}  \right|  \right] }} $$
+
+Where $n$ is the number of regions, ${p}_{i}$ is the minority population 
+proportion in region $i$, and ${a}_{i}$ is the area in square meters of region
+$i$.
+
+This proposed metric measures the relative difference in minority population
+proportion per unit of area $\frac {p}{a}$ between all regions $i$. If a region
+has a larger percentage of minorities in a smaller area than some other region,
+the difference will be larger, which indicates a higher segregation. This
+measure has the benefit of being able to compare multiple regions against each
+other, allowing us to better understand changes across a city, as well as taking
+into consideration physical population density.
+
+```{r new metric}
+
+seg.metrics['New Metric'] = as.vector(sapply(city.data, newMetric))
+
+new.rank.data <- seg.metrics %>%
+    melt() %>% 
+    rename(metric = variable) %>% 
+    dcast(metric ~ City)
+
+max.new.metric <- seg.metrics %>% 
+    filter(`New Metric` == max(`New Metric`)) %>% 
+    select(City, `New Metric`)
+
+par(mar = c(0, 0, 1, 0), family = 'serif')
+plot.qual(
+    new.rank.data,
+    rs.ln = 6,
+    alpha = 0.5,
+    dt.tx = T,
+    main = 'Changes in Segregation Rank Across Metrics (with New Metric)')
+```
+
+According to this new metric, the most segregated city is
+**`r max.new.metric[1,1]`**.
+
+Here again we see little relation between the new metric and the Gini
+Coefficient and Correlation Ratio, likely because of the inclusion of
+area data. More interesting is how the rankings change between the Delta
+Index and new metric. Between these two, there is only a correlation of
+**`r round(cor(seg.metrics['New Metric'], seg.metrics['Delta']), digits = 2)`**.
+
 
 
