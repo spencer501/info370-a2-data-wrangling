@@ -75,7 +75,7 @@ _Isolation Index_, which measures the probability a minority person shares
 an area with another minority person, correcting for the possibility of more
 than one minority group. It produces a value from 0 to 1, with higher values
 indicating more segregation. The isolation index is determined by looking at
-the proportion of minority members $\left( \frac{{x}_{i}}{X} \right)$ and
+the proportion of minority members $\left( \frac{{x}_{i}}{X}} \right)$ and
 proportion of majority group members $\left( \frac{{y}_{i}}{{t}_{i}} \right)$
 in a region. The correlation ratio then takes the isolation index and puts it in
 the context of the total minority proportion in a city $P$. This is a good
