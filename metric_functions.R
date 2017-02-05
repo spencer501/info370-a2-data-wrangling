@@ -56,7 +56,7 @@ deltaIndex <- function(city) {
 }
 
 # New metric
-areaDiff <- function(city) {
+newMetric <- function(city) {
 
     p <- city$pct.not.white # ratio of non white population to total population
                             # in each census tract
