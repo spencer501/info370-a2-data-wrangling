@@ -35,20 +35,20 @@ $i$, ${j}_{i}$ is the minority population proportion region $i$, $T$ is the
 total population across all regions, and $P$ is minority population proportion
 across all regions.
 
-The _Gini Coefficient_ defines segregation by the _eveness_ of a population. It
+The _Gini Coefficient_ defines segregation by the _evenness_ of a population. It
 essentially describes the average difference in minority population proportions
-across all regions in a city, expressed over the maximimun difference in the
+across all regions in a city, expressed over the maximum difference in the
 city to give a proportion from 0 to 1, with higher values indicating more
-segregation (averge difference is closer to the max difference). ${p}_{i}$ and
+segregation (average difference is closer to the max difference). ${p}_{i}$ and
 ${t}_{i}$ give tell us the size of a minority population in a region, which
-we can then compare across regions, and normalize agianst the total minority
+we can then compare across regions, and normalize against the total minority
 population ($P$ and $T$). This metric is great for gauging differences between
 regions, as it specifically compares distances between all regions. It is also a
 comparison of spatial distributions, something easy to visualize and understand.
 However, it is naive to think that the physical locations of a minority
 population is the only thing that contributes to segregation. This measure
 also leaves out possibly important factors such as region location and detailed
-dynamics withing a region, such as the size of two groups being compared.
+dynamics within a region, such as the size of two groups being compared.
 
 
 ### Correlation Ratio:
@@ -59,17 +59,28 @@ $$\frac { (I-P) }{ (1-P) } ;\quad I=\sum _{ i=1 }^{ n }{ \left[ \left( \frac
 Where $n$ is the number of regions, $I$ is the _isolation index_, $P$ is the
 minority population proportion across all regions, ${x}_{i}$ is the minority
 population of area $i$, ${y}_{i}$ is the majority population of area $i$, $X$ is
-the the total minority population across all regions, and ${t}_{i}$ is the total
+the total minority population across all regions, and ${t}_{i}$ is the total
 population of region $i$.
 
-The _Correlation ratio_ is a method of measuring the potential contact between
+The _Correlation Ratio_ is a method of measuring the potential contact between
 minority and majority group members, indicating the extent to which two groups
 share common residential areas. This measure is an adjusted version of the
-_isolation index_, which measures the probability a minority person shares
+_Isolation Index_, which measures the probability a minority person shares
 an area with another minority person, correcting for the possibility of more
 than one minority group. It produces a value from 0 to 1, with higher values
-indicating more segregationThe isolation index is determined by looking at
-the proportion of of minority members $\left( \frac{{x}_{i}}{X} \right)$ and
+indicating more segregation. The isolation index is determined by looking at
+the proportion of minority members $\left( \frac{{x}_{i}}{X} \right)$ and
 proportion of majority group members $\left( \frac{{y}_{i}}{{t}_{i}} \right)$
 in a region. The correlation ratio then takes the isolation index and puts it in
 the context of the total minority proportion in a city $P$.
+
+
+### Delta:
+$$0.5\sum _{ i=1 }^{ n }{ \left| \left( \frac { { x }_{ i } }{ X }  \right) -\left( \frac { { a }_{ i } }{ A }  \right)  \right|  } $$
+
+Where $n$ is the number of regions, ${x}_{i}$ is the minority population of area
+$i$, $X$ is the total minority population across all regions, ${a}_{i}$ is
+the area of region $i$ in square meters, and $A$ is the total area across all
+regions in square meters.
+
+The _Delta Index_
