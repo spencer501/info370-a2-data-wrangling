@@ -40,8 +40,8 @@ correlationRatio <- function(city) {
 }
 
 
-# Delta
-delta <- function(city) {
+# Delta index
+deltaIndex <- function(city) {
 
     x <- city$pop.not.white # non white population in each census tract
     a <- city$area          # area of each census tract
