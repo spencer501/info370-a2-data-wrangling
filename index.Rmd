@@ -85,3 +85,40 @@ the area of region $i$ in square meters, and $A$ is the total area across all
 regions in square meters.
 
 The _Delta Index_ measures the concentration of a minority group.
+
+
+## **Metric Comparison**
+
+After computing these metrics, we can directly compare the segregation of 
+various cities:
+
+```{r segregation table}
+kable(seg.metrics, digits = 2)
+```
+
+All of the metrics used are defined on a normalized scale, with **higher values
+indicating higher segregation**. It is important to note, however, that even
+though all of these metrics have the same range in value, the scales are not
+necessarily equvalent. A .5 Gini Coefficient is not the same as a .5 Delta 
+Index, for example. However, for simplicity, we will treat them as more or less
+comparable.
+
+```{r most segregated}
+max.gini <- seg.metrics %>% 
+    filter(Gini == max(Gini)) %>% 
+    select(City, Gini)
+
+max.corr <- seg.metrics %>% 
+    filter(Correlation == max(Correlation)) %>% 
+    select(City, Correlation)
+
+max.delta <- seg.metrics %>% 
+    filter(Delta == max(Delta)) %>% 
+    select(City, Delta)
+```
+
+According to the Gini Coefficient, the most segregated city is
+**`r max.gini[1, 1]`** (`r round(max.gini[1, 2], digits = 2)`), the Correlation
+Ratio says it's **`r max.corr[1, 1]`** (`r round(max.corr[1, 2], digits = 2)`),
+and the Delta Index shows **`r max.delta[1, 1]`**
+(`r round(max.delta[1, 2], digits = 2)`), as the most segregated.
