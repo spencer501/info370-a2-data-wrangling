@@ -5,7 +5,8 @@
 giniCoeff <- function(city) {
 
     t <- city$pop           # total population of each census tract
-    p <- city$pct.not.white # ratio of non white population to total population in each census tract
+    p <- city$pct.not.white # ratio of non white population to total population
+                            # in each census tract
     x <- city$pop.not.white # non white population in each census tract
 
     # help from: http://stackoverflow.com/questions/11388359/
@@ -50,6 +51,24 @@ deltaIndex <- function(city) {
     a.tot <- sum(a)
 
     result <- .5 * sum(abs((x/x.tot) - (a/a.tot)))
+
+    return(result)
+}
+
+# New metric
+areaDiff <- function(city) {
+
+    p <- city$pct.not.white # ratio of non white population to total population
+                            # in each census tract
+    a <- city$area          # area of each census tract
+
+    # help from: http://stackoverflow.com/questions/11388359/
+    combinations <- expand.grid(1:nrow(city), 1:nrow(city))
+    i <- combinations[, 1]
+    j <- combinations[, 2]
+
+
+    result <- sum(abs((p[i]/a[i])-(p[j]/a[j])))
 
     return(result)
 }
