@@ -10,12 +10,8 @@ source('metric_functions.R')
 # Get geographical data (to add to city data)
 geo.data <- read.delim('data/Gaz_tracts_national.txt') %>%
     select(GEOID,
-           ALAND,
-           INTPTLONG,
-           INTPTLAT) %>%
-    rename(area = ALAND,
-           long = INTPTLONG,
-           lat = INTPTLAT)
+           ALAND) %>%
+    rename(area = ALAND)
 
 # store all data as a list of dataframes
 # help from: http://stackoverflow.com/questions/5319839/,
