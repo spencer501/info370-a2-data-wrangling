@@ -54,3 +54,13 @@ city.data <- lapply(file.path(folder.location,
                        by = "GEOID")
         return(df)
     })
+
+# Compute metrics for each city
+seg.metrics <- data.frame(
+    gini = lapply(city.data,
+                  giniCoeff),
+    correlation = lapply(city.data,
+                         correlationRatio),
+    delta = lapply(city.data,
+                   deltaIndex)
+)
