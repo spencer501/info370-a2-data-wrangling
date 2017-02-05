@@ -56,16 +56,6 @@ city.data <- lapply(file.path(folder.location,
     })
 
 # Compute metrics for each city
-seg.metrics <- as.data.frame(cbind(
-    Gini = sapply(city.data,
-                  giniCoeff),
-    Correlation = sapply(city.data,
-                         correlationRatio),
-    Delta = sapply(city.data,
-                   deltaIndex)
-))
-
-# Rename cities
 city.names <- c(
     'Baltimore',
     'Charleston',
@@ -80,8 +70,18 @@ city.names <- c(
     'Pittsburgh',
     'St. Louis',
     'Syracuse',
-    'Wichita'
-)
+    'Wichita')
 
-row.names(seg.metrics) <- city.names
+seg.metrics <- as.data.frame(cbind(
+    City = city.names,
+    Gini = sapply(city.data,
+                  giniCoeff),
+    Correlation = sapply(city.data,
+                         correlationRatio),
+    Delta = sapply(city.data,
+                   deltaIndex)),
+    stringsAsFactors = FALSE) %>%
 
+    mutate(Gini = as.numeric(Gini),
+           Correlation = as.numeric(Correlation),
+           Delta = as.numeric(Delta))
